@@ -137,9 +137,9 @@ namespace Fernseher
                                     Console.Write("Druckem Sie Taste N oder n:");
                                     neuProgramm = Convert.ToChar(Console.ReadLine());
 
-                                    if (neuProgramm == 'N' || neuProgramm == 'n')
+                                    if (neuProgramm == 4)
                                         break;
-                                } while (neuProgramm != 'N' || neuProgramm != 'n');
+                                } while (neuProgramm != 4);
 
                                 
                                 
@@ -320,7 +320,7 @@ namespace Fernseher
         public void ListeStellen(string argSendung)
         {
             Verbindung = null;
-            sendung = "Programm";
+            argSendung = "Programm";
             programmNummer = 1;
         }
 
