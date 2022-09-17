@@ -53,8 +53,17 @@ namespace Fernseher
 
                 Console.WriteLine("-----------------------------------");
                 Console.WriteLine("Liste:");
-                Console.WriteLine("-----------------------------------");
-                HauptListe.ListeZeigen();
+                //Console.WriteLine("-----------------------------------");
+
+                if (HauptListe.programmNummer == 0)
+                {
+                    Console.WriteLine("Liste ist leer.");
+                }
+                else
+                {
+                    HauptListe.ListeZeigen();
+                }
+
                 
 
 
@@ -306,7 +315,7 @@ namespace Fernseher
 
     class SendungListe
     {
-        public string sendung;
+        public string sendung = "Programm";
 
         SendungListe Verbindung;
 
@@ -320,7 +329,7 @@ namespace Fernseher
         public void ListeStellen(string argSendung)
         {
             Verbindung = null;
-            argSendung = "Programm";
+            this.sendung = argSendung;
             programmNummer = 1;
         }
 
@@ -348,16 +357,13 @@ namespace Fernseher
 
         public void ListeZeigen()
         {
-           
             if(Verbindung != null && Verbindung.programmNummer > 0)
             {
                 Verbindung.ListeZeigen();
                 Console.WriteLine(sendung + " " + Verbindung.programmNummer);
             }
-            else
-            {
-                Console.WriteLine("Liste ist leer.");
-            }
+            
+            
         }
 
 
