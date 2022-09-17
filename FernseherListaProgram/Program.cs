@@ -373,15 +373,8 @@ namespace Fernseher
         public void GetNth(int index)
         {
 
-            //if (Verbindung != null)
-            //   if (programmAendern == index)
-            //        Console.WriteLine(Verbindung.sendung);
-
-            if (Verbindung != null)
-                foreach (var item in Verbindung.sendung)
-                {
-                    
-                }
+           
+                
            
         }
 
