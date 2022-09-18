@@ -75,7 +75,7 @@ namespace Fernseher
                 Console.WriteLine("Fernseher Einschalten  [1] ");
                 Console.WriteLine("Lautstärke ändern      [2] ");
                 Console.WriteLine("Programm ändern        [3] ");
-                Console.WriteLine("Liste Erweitern        [4] ");
+                Console.WriteLine("Liste Neue/Erweitern   [4] ");
                 Console.WriteLine("Liste rückwärts zeigen [5] ");
                 Console.WriteLine("Fernseher ausschalten  [6] ");
                 Console.WriteLine();
@@ -130,7 +130,7 @@ namespace Fernseher
 
                         if (FernEin.EinSchalten() == true)
                         {
-                            Console.Write("Druckem Sie Taste \"N\" oder \"n\":");
+                            Console.Write("Druckem Sie Taste 4:");
                             int neuProgramm = Convert.ToInt32(Console.ReadLine());
                             if (neuProgramm == 4 )
                             {
@@ -143,11 +143,11 @@ namespace Fernseher
                                 {
                                     //Console.Clear();
                                     Console.WriteLine("Bitte drucken Sie richtige Taste!!!");
-                                    Console.Write("Druckem Sie Taste N oder n:");
-                                    neuProgramm = Convert.ToChar(Console.ReadLine());
+                                    Console.Write("Druckem Sie Taste 4:");
+                                    neuProgramm = Convert.ToInt32(Console.ReadLine());
 
                                     if (neuProgramm == 4)
-                                        break;
+                                        HauptListe.ListeErweitern(HauptListe.sendung, HauptListe.programmNummer);
                                 } while (neuProgramm != 4);
 
                                 
