@@ -12,13 +12,12 @@ namespace Fernseher
 
             EinAusGeschaltet FernEin = new EinAusGeschaltet();
             LautsprecherClass LautSprecherInput = new LautsprecherClass();
-            //ProgramAendern NeuProgram = new ProgramAendern();
+            ProgramAendern AndereProgramm = new ProgramAendern();
 
             SendungListe HauptListe = new SendungListe();
 
-            //int listeLaenge;
-
-            //int listeEnde = 4;
+            
+            //int aktueleSendung = 0;
             
 
             do
@@ -33,40 +32,28 @@ namespace Fernseher
                     Console.WriteLine("Fernseher ist Ausgeschaltet!!!");
                 }
 
-                //Console.WriteLine("Program: {0}", NeuProgram.ProgrammNummer());
 
+                
+                
                 Console.WriteLine("Lautstärke: {0}", LautSprecherInput.LautsprecherZustand());
+                
 
-                Console.WriteLine("Programm : {0}",HauptListe.programmNummer);
-
-                //Console.WriteLine("Sendung " + HauptListe.GetNth(HauptListe.programAendern));
-
-                //HauptListe.ListeStellen("Programm 1");
-
-
-
-
-                //for (HauptListe.listeLaenge = 2; HauptListe.listeLaenge < HauptListe.listeEnde; HauptListe.listeLaenge++)
-                //{
-                //    HauptListe.ListeErweitern("Programm " + HauptListe.listeLaenge);
-                //}
+                Console.WriteLine("Aktuele Programm: {0}",AndereProgramm.AktueleProgrammNummer());
 
                 Console.WriteLine("-----------------------------------");
+                Console.WriteLine("Program: {0}", HauptListe.ZeigenSendungNummer());
                 Console.WriteLine("Liste:");
-                //Console.WriteLine("-----------------------------------");
+               
 
-                if (HauptListe.programmNummer == 0)
+                if (HauptListe.ZeigenSendungNummer() == 0)
                 {
-                    Console.WriteLine("Liste ist leer.");
+                    
+                    Console.WriteLine("  Liste ist leer!\n   Bitte Taste 4 drucken.");
                 }
                 else
                 {
                     HauptListe.ListeZeigen();
                 }
-
-                
-
-
 
 
                 Console.WriteLine();
@@ -112,13 +99,22 @@ namespace Fernseher
                     case 3:
                         if (FernEin.EinSchalten() == true)
                         {
-                            Console.Write("Programmnummer: ");
+                           
+                            Console.Write("Program zu ändern geben Sie Nummer bis {0} ein:", HauptListe.ZeigenSendungNummer());
                             int programmWahl = Convert.ToInt32(Console.ReadLine());
 
-                            HauptListe.GetNth(programmWahl);
-                          
+                            
 
+                            for (int i = 0; i <= HauptListe.ZeigenSendungNummer(); i++)
+                            {
+                                if (i == programmWahl)
+                                {
+                                    AndereProgramm.ProgrammNummerAendern(programmWahl);
+                                }
+                               
 
+                            }
+                            
                         }
                         else
                         {
@@ -135,7 +131,7 @@ namespace Fernseher
                             if (neuProgramm == 4 )
                             {
                                 
-                                HauptListe.ListeErweitern(HauptListe.sendung, HauptListe.programmNummer);    
+                                HauptListe.ListeErweitern(HauptListe.SendungNameZeigen(), HauptListe.ZeigenSendungNummer());    
                             }
                             else
                             {
@@ -147,7 +143,7 @@ namespace Fernseher
                                     neuProgramm = Convert.ToInt32(Console.ReadLine());
 
                                     if (neuProgramm == 4)
-                                        HauptListe.ListeErweitern(HauptListe.sendung, HauptListe.programmNummer);
+                                        HauptListe.ListeErweitern(HauptListe.SendungNameZeigen(), HauptListe.ZeigenSendungNummer());
                                 } while (neuProgramm != 4);
 
                                 
@@ -265,64 +261,65 @@ namespace Fernseher
     }//Ende class  LautsprecherClass 
 
 
-    //class ProgramAendern
-    //{
-    //    private int programmNummerInt = 0;
+    class ProgramAendern
+    {
+        
+        SendungListe ProgrammNummerDurchAndereClassAendern = new SendungListe();
+        
+        private int programmNummerInt;
 
-    //    public void ProgrammNummerAendern(int argProgramNummerInt) // Änderen Programnummer
-    //    {
-    //        this.programmNummerInt = argProgramNummerInt;
-    //    }
+        public void ProgrammNummerAendern(int argProgrammNummerInt) // Änderen Programmnummer
+        {
+            programmNummerInt = argProgrammNummerInt;
+        }
 
-    //    public int ProgrammNummer() // Zeigt Programmnummer
-    //    {
-    //        return programmNummerInt;
-    //    }
+        public int AktueleProgrammNummer()
+        {
+            return programmNummerInt;
+        }
 
-    //    public void ProgrammSteuerung()
-    //    {
+        
 
+        //public void ProgrammSteuerung(int argProgrammNummerInt)
+        //{
+        //    if (ProgrammNummerDurchAndereClassAendern.ZeigenSendungNummer() == argProgrammNummerInt && argProgrammNummerInt < programmNummerInt + 1)
+        //    {
+        //        //ProgrammNummerAendern(argProgrammNummerInt);
+        //        programmNummerInt = argProgrammNummerInt;
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Geben Sie bitte eralubte Nummer ein!");
+        //    }
 
-    //        Console.WriteLine("-------------------------------");
-    //        Console.Write("Program zu ändern geben Sie Nummer von 0 bis 10 ein:");
-
-    //        int eingabeProgrammNummer = Convert.ToInt32(Console.ReadLine());
-
-    //        ProgrammNummerAendern(eingabeProgrammNummer);
-
-    //        int[] programListe = new int[eingabeProgrammNummer + 1];
-
-    //        if (eingabeProgrammNummer < 11)
-    //        {
-    //            Console.Write("Programm:");
-    //            for (int i = 1; i < programListe.Length; i++)
-    //            {
-    //                Console.Write(i + " ");
-    //            }
-
-    //        }
-    //        else
-    //        {
-    //            Console.WriteLine("Geben Sie erlaubte Programmnummer ein!!!");
-    //        }
-    //        Console.WriteLine("\n-------------------------------");
+        //    //ProgrammNummerAendern(argProgrammNummerInt); ovako radi
 
 
-    //    }//Ende Methode ProgrammSteuerung
 
-    //}//Ende Class ProgramAendern
+
+        //}//Ende Methode ProgrammSteuerung
+
+    }//Ende Class ProgramAendern
 
 
     class SendungListe
     {
-        public string sendung = "Programm";
+        private string sendung = "Programm";
 
         SendungListe Verbindung;
 
-        public int programmNummer = 0;
+        private int sendungNummer = 0;
 
         
-
+        public string SendungNameZeigen()
+        {
+            return sendung;
+        }
+        
+        public int ZeigenSendungNummer()
+        {
+            return sendungNummer;
+        }
 
 
         //Liste Anfang
@@ -330,7 +327,7 @@ namespace Fernseher
         {
             Verbindung = null;
             this.sendung = argSendung;
-            programmNummer = 1;
+            sendungNummer = 1;
         }
 
         //Neue Sendung an der Liste stellen
@@ -340,15 +337,15 @@ namespace Fernseher
             {
                 Verbindung = new SendungListe();
                 Verbindung.ListeStellen(sendung);
-                
-                programmNummer += 1;
+
+                sendungNummer += 1;
             }
             //Methode ruft sich
             else
             {
                 Verbindung.ListeErweitern(argSendung, argProgrammNummer);
 
-                programmNummer++;
+                sendungNummer++;
             }
 
         }
@@ -357,10 +354,10 @@ namespace Fernseher
 
         public void ListeZeigen()
         {
-            if(Verbindung != null && Verbindung.programmNummer > 0)
+            if(Verbindung != null && Verbindung.sendungNummer > 0)
             {
                 Verbindung.ListeZeigen();
-                Console.WriteLine(sendung + " " + Verbindung.programmNummer);
+                Console.WriteLine(sendung + " " + Verbindung.sendungNummer);
             }
             
             
@@ -372,7 +369,10 @@ namespace Fernseher
 
         public void GetNth(int index)
         {
-
+            if (Verbindung != null && Verbindung.sendungNummer == index)
+            {
+                Verbindung.ListeZeigen();
+            }
            
                 
            
