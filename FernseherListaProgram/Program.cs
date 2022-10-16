@@ -48,6 +48,7 @@ namespace Fernseher
                 else
                 {
                     HauptListe.ListeZeigen();
+                    HauptListe.ListeZeigenRuckwaerts();
                 }
 
 
@@ -272,6 +273,8 @@ namespace Fernseher
 
     class SendungListe
     {
+        bool listeVersion = true;
+
         private string sendung = "Programm";
 
         SendungListe Verbindung;
@@ -316,7 +319,10 @@ namespace Fernseher
                 sendungNummer++;
             }
 
-        }
+        }//Ende Methode ListeErweitern
+
+
+        
 
         public void ListeZeigen()
         {
@@ -324,6 +330,18 @@ namespace Fernseher
             {
                 Verbindung.ListeZeigen();
                 Console.WriteLine(sendung + " " + Verbindung.sendungNummer);
+            }
+
+
+        }
+
+
+        public void ListeZeigenRuckwaerts()
+        {
+            if (Verbindung != null && Verbindung.sendungNummer > 0)
+            {
+                Console.WriteLine(sendung + " " + Verbindung.sendungNummer);
+                Verbindung.ListeZeigenRuckwaerts();
             }
 
 
