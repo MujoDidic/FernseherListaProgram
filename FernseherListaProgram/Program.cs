@@ -47,8 +47,17 @@ namespace Fernseher
                 }
                 else
                 {
-                    HauptListe.ListeZeigen();
-                    HauptListe.ListeZeigenRuckwaerts();
+                    //HauptListe.ListeZeigen();
+                    //HauptListe.ListeZeigenRuckwaerts();
+
+                    if (AndereProgramm.ListeVersionZurückLiefern() == true)
+                    {
+                        HauptListe.ListeZeigen();
+                    }
+                    else
+                    {
+                        HauptListe.ListeZeigenRuckwaerts();
+                    }
                 }
 
 
@@ -148,6 +157,8 @@ namespace Fernseher
 
                     case 5:
 
+                        AndereProgramm.ListeVersionAendern();
+
                         break;
 
                     case 6:
@@ -171,7 +182,7 @@ namespace Fernseher
     class EinAusGeschaltet
     {
 
-        bool einAus = false;
+        bool einAus = true;
 
         private void ZustandAendern(bool einAus) // Änderen der Zustand von "bool einAus" in false oder true
         {
@@ -255,6 +266,8 @@ namespace Fernseher
 
         SendungListe ProgrammNummerDurchAndereClassAendern = new SendungListe();
 
+        private bool listeVersion = true;
+
         private int programmNummerInt;
 
         public void ProgrammNummerAendern(int argProgrammNummerInt) // Änderen Programmnummer
@@ -267,13 +280,31 @@ namespace Fernseher
             return programmNummerInt;
         }
 
+        public bool ListeVersionZurückLiefern()
+        {
+            return listeVersion;
+        }
+
+        public void ListeVersionAendern()
+        {
+            if (listeVersion == true)
+            {
+                listeVersion = false;
+
+            }
+            else
+            {
+                listeVersion = true;
+            }
+        }
+
 
     }//Ende Class ProgramAendern
 
 
     class SendungListe
     {
-        bool listeVersion = true;
+        
 
         private string sendung = "Programm";
 
@@ -291,6 +322,8 @@ namespace Fernseher
         {
             return sendungNummer;
         }
+
+        
 
 
         //Liste Anfang
